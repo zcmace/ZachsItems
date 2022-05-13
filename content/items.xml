@@ -1,0 +1,8 @@
+<items gfxroot="gfx/items/" version="1">
+  <passive
+    cache="Damage FireDelay"
+    description="Forbidden knowledge enboldens you."
+    gfx="prophets_lore.png"
+    name="Prophet's Lore"
+  />
+</items>

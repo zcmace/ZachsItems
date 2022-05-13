@@ -1,18 +1,34 @@
-local MyMod = RegisterMod("ZachsItems", 1)
+local MyMod = RegisterMod("ZachsItems", 1);
+local myPlayer = Isaac.GetPlayer();
+local lore = Isaac.GetItemIdByName("Prophet's Lore");
 
-local book = Isaac.GetItemIdByName("Prophet's Lore")
 
 
-function MyMod:CacheUpdate(player, CacheFlag)
-    local player = Isaac.GetPlayer(0)
-    if player.HasCollectible(book) then
-        if CacheFlag == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage +_1
+------------- Prophets Lore ITEM
+function MyMod:LoreUpdate(player, cacheFlag)
+    
+
+    local num = player:GetCollectibleNum(lore, true);
+
+
+    if cacheFlag == CacheFlag.CACHE_DAMAGE then
+        if player:HasCollectible(lore) then
+        
+            player.Damage = player.Damage + (1 * num);
+
         end
-        if CacheFlag == CacheFlag.CACHE_FIREDELAY then
-            player.FireDelay = player.FireDelay +_1
+
+    end
+
+    if cacheFlag == CacheFlag.CACHE_FIREDELAY  then 
+        if player:HasCollectible(lore) then
+            player.MaxFireDelay = player.MaxFireDelay - (1 * num);
         end
     end
+
 end
 
-MyMod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, MyMod.CacheUpdate)
+MyMod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, MyMod.LoreUpdate);
+
+-------------
+
